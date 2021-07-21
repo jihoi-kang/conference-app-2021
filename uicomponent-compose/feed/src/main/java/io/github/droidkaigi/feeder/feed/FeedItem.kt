@@ -1,11 +1,13 @@
 package io.github.droidkaigi.feeder.feed
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -209,18 +211,28 @@ private fun AudioControlButton(
     isPlayingPodcast: Boolean,
 ) {
     if (isVisible) {
-        if (isPlayingPodcast) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_baseline_pause_24),
-                modifier = modifier,
-                contentDescription = "pause"
-            )
-        } else {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_baseline_play_arrow_24),
-                modifier = modifier,
-                contentDescription = "play"
-            )
+        Box(modifier = modifier) {
+            val childModifier = Modifier.size(24.dp)
+            Canvas(modifier = childModifier, onDraw = {
+                drawCircle(
+                    color = Color.Black.copy(alpha = 0.48f),
+                )
+            })
+            if (isPlayingPodcast) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_pause_24),
+                    modifier = childModifier,
+                    contentDescription = "pause",
+                    tint = Color.White,
+                )
+            } else {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_play_arrow_24),
+                    modifier = childModifier,
+                    contentDescription = "play",
+                    tint = Color.White,
+                )
+            }
         }
     }
 }
